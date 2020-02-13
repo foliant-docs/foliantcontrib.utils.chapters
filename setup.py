@@ -1,7 +1,7 @@
 from setuptools import setup
 
 
-SHORT_DESCRIPTION = ''
+SHORT_DESCRIPTION = 'Utils for chapters'
 
 try:
     with open('README.md', encoding='utf8') as readme:
@@ -12,15 +12,15 @@ except FileNotFoundError:
 
 
 setup(
-    name='foliantcontrib.utils.combined_options',
+    name='foliantcontrib.utils.chapters',
     description=SHORT_DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     long_description_content_type='text/markdown',
-    version='1.0.5',
+    version='1.0.0',
     author='Daniil Minukhin',
     author_email='ddddsa@gmail.com',
-    url='https://github.com/foliant-docs/foliantcontrib.utils.combined_options',
-    packages=['foliant.preprocessors.utils'],
+    url='https://github.com/foliant-docs/foliantcontrib.utils.chapters',
+    packages=['foliant.contrib'],
     license='MIT',
     platforms='any',
     install_requires=[
