@@ -23,11 +23,37 @@ class Chapters:
     def __init__(self,
                  chapters: list):
         self._chapters = chapters
+        self._flat = flatten_seq(chapters)
+
+    def __len__(self):
+        return len(self._flat)
+
+    def __getitem__(self, ind: int):
+        return self._flat[ind]
+
+    def __contains__(self, item: str):
+        return item in self._flat
+
+    def __iter__(self):
+        return iter(self._flat)
+
+    def __repr__(self):
+        return f'Chapters({self._chapters})'
+
+    @property
+    def chapters(self):
+        """Original chapters list"""
+        return self._chapters
+
+    @chapters.setter
+    def chapters(self, chapters):
+        self._chapters = chapters
+        self._flat = flatten_seq(chapters)
 
     @property
     def flat(self):
         """Flat list of chapter file names"""
-        return flatten_seq(self._chapters)
+        return self._flat
 
     def paths(self, parent_dir: str or PosixPath):
         """

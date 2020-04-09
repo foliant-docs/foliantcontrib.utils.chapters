@@ -41,7 +41,7 @@ chapters:
 If we want to interact wit this list of chapters, we will probably only need path to Markdown-files in the proper order. That's exactly what the `Chapters` class offers. Let's translate this chapter list into Python and give it to the `Chapters` class:
 
 ```python
->>> chapters_list = {'chapters': ['introduction.md',{'Overview': [{'The Problem': 'problem.md'},{'Requirements': 'req.md'},{'Quick Start': ['qs/installation.md','qs/first_steps.md','qs/advanced_usage.md']}]},{'Specifications': ['specs/core.md', 'specs/classes.md']}]}
+>>> chapters_list = ['introduction.md',{'Overview': [{'The Problem': 'problem.md'},{'Requirements': 'req.md'},{'Quick Start': ['qs/installation.md','qs/first_steps.md','qs/advanced_usage.md']}]},{'Specifications': ['specs/core.md', 'specs/classes.md']}]
 >>> chapters = Chapters(chapters_list)
 
 ```
@@ -83,5 +83,40 @@ PosixPath('src/qs/first_steps.md')
 PosixPath('src/qs/advanced_usage.md')
 PosixPath('src/specs/core.md')
 PosixPath('src/specs/classes.md')
+
+```
+
+## Alternative usage
+
+You can also use the `Chapters` object as if it was list:
+
+```python
+>>> chapters[0]
+'introduction.md'
+>>> 'req.md' in chapters
+True
+>>> for chapter in chapters:
+...     print(chapter)
+...     break
+introduction.md
+
+```
+
+Original chapters list is available in the `chapters` property:
+
+```python
+>>> chapters.chapters
+['introduction.md', {'Overview': [{'The Problem': 'problem.md'}, {'Requirements': 'req.md'}, {'Quick Start': ['qs/installation.md', 'qs/first_steps.md', 'qs/advanced_usage.md']}]}, {'Specifications': ['specs/core.md', 'specs/classes.md']}]
+
+```
+
+You can redefine your chapters on the fly:
+
+```python
+>>> chapters.chapters = ['one.md', {'two': 'three.md'}]
+>>> for chapter in chapters:
+...     print(chapter)
+one.md
+three.md
 
 ```
