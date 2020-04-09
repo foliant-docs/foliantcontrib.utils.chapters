@@ -29,7 +29,10 @@ class Chapters:
         """Flat list of chapter file names"""
         return flatten_seq(self._chapters)
 
-    @property
     def paths(self, parent_dir: str or PosixPath):
-        """Flat list of PosixPath objects relative to project root."""
+        """
+        Returns generator yielding PosixPath object with chapter path, relative
+        to parent_dir.
+        """
+
         return (Path(parent_dir) / chap for chap in self.flat)
