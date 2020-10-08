@@ -86,6 +86,45 @@ PosixPath('src/specs/classes.md')
 
 ```
 
+### The **get_chapter_title** method
+
+Method tries to find the chapter by its path in the chapter list and returns its title, if it was defined in the chapter list.
+
+Let's return to the example chapter list from the **Usage** section:
+
+```yml
+chapters:
+    - introduction.md
+    - Overview:
+        - The Problem: problem.md
+        - Requirements: req.md
+        - Quick Start:
+            - qs/installation.md
+            - qs/first_steps.md
+            - qs/advanced_usage.md
+    - Specifications:
+        - specs/core.md
+        - specs/classes.md
+```
+
+In this case if we try to find the title of the `req.md` chapter:
+
+```python
+>>> chapters.get_chapter_title('req.md')
+'Requirements'
+
+```
+
+We get the title `'Requirements'`, which was defined in the config. On the other hand, if we try to get the title of a chapter `qs/first_steps.md`:
+
+```python
+>>> chapters.get_chapter_title('qs/first_steps.md')
+''
+
+```
+
+We will get an empty string, because the title for this chapter was not defined in the config.
+
 ## Alternative usage
 
 You can also use the `Chapters` object as if it was list:

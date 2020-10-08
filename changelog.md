@@ -1,6 +1,10 @@
+# 1.0.3
+
+-   Add `get_chapter_title` method.
+
 # 1.0.2
 
--   Add native usage with magick methods.
+-   Add native usage with magic methods.
 
 # 1.0.1
 

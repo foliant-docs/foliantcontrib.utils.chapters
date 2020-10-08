@@ -13,6 +13,10 @@ def flatten_seq(seq):
     return result
 
 
+class ChapterNotFoundError(Exception):
+    pass
+
+
 class Chapters:
     """
     Helper class converting chapter list of complicated structure
@@ -62,3 +66,64 @@ class Chapters:
         """
 
         return (Path(parent_dir) / chap for chap in self.flat)
+
+    def get_chapter_title(self, chapter_path: str):
+        """
+        Returns the title for the chapter, defind in the chapters list.
+        Returns empty string if chapter defined without title.
+        Raises ChapterNotFoundError if chapter is not present in the list.
+
+        Examples:
+
+        ***
+        chapters:
+            - Chapter Title: info/index.md
+
+        get_chapter_title('info/index.md') will return 'Chapter Title'
+
+        ***
+        chapters:
+            - info/index.md
+
+        get_chapter_title('info/index.md') will return ''
+
+        ***
+        chapters:
+            - info.md
+
+        get_chapter_title('info/index.md') will raise ChapterNotFoundError
+
+        :param chapter_path: path to the chapter for which the title needs to be
+                             found, _as it is stated in the chapters list_.
+
+        :returns: chapter title or empty string.
+        """
+        def find_chapter(chapters: list or dict, to_find: str) -> str or dict or None:
+            if isinstance(chapters, list):
+                for i in chapters:
+                    if isinstance(i, (list, dict)):
+                        found = find_chapter(i, to_find)
+                        if found:
+                            return found
+                    elif isinstance(i, str) and i == to_find:
+                        return i
+            elif isinstance(chapters, dict):
+                val = next(iter(chapters.values()))
+                if isinstance(val, str) and val == to_find:
+                    return chapters
+                else:
+                    found = find_chapter(val, to_find)
+                    if found:
+                        return found
+            elif isinstance(chapters, str):
+                if chapters == to_find:
+                    return chapters
+            return None
+
+        chapter = find_chapter(self.chapters, chapter_path)
+        if chapter is None:
+            raise ChapterNotFoundError(f'{chapter_path} is not in the chapter list')
+        if isinstance(chapter, str):
+            return ''
+        elif isinstance(chapter, dict):
+            return next(iter(chapter.keys()))
