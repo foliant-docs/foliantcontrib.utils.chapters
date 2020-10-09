@@ -88,7 +88,7 @@ PosixPath('src/specs/classes.md')
 
 ### The **get_chapter_title** method
 
-Method tries to find the chapter by its path in the chapter list and returns its title, if it was defined in the chapter list.
+Method tries to find the chapter by its path in the chapter list and returns its MkDocs-style title, if it was defined in the chapter list.
 
 Let's return to the example chapter list from the **Usage** section:
 
@@ -107,7 +107,7 @@ chapters:
         - specs/classes.md
 ```
 
-In this case if we try to find the title of the `req.md` chapter:
+If we try to find the title of the `req.md` chapter:
 
 ```python
 >>> chapters.get_chapter_title('req.md')
