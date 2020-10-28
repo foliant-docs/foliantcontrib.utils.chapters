@@ -25,7 +25,12 @@ class Chapters:
     """
 
     def __init__(self,
-                 chapters: list):
+                 chapters: list,
+                 working_dir: str or PosixPath or None = None,
+                 src_dir: str or PosixPath or None = None,
+                 ):
+        self.working_dir = Path(working_dir).resolve() if working_dir else None
+        self.src_dir = Path(src_dir).resolve() if src_dir else None
         self._chapters = chapters
         self._flat = flatten_seq(chapters)
 
@@ -44,6 +49,17 @@ class Chapters:
     def __repr__(self):
         return f'Chapters({self._chapters})'
 
+    @staticmethod
+    def from_config(config: dict):
+        '''
+        Returns a Chapters instance, initiated with properties from config.
+        '''
+        return Chapters(
+            config['chapters'],
+            working_dir=config['tmp_dir'],
+            src_dir=config['src_dir']
+        )
+
     @property
     def chapters(self):
         """Original chapters list"""
@@ -58,6 +74,21 @@ class Chapters:
     def flat(self):
         """Flat list of chapter file names"""
         return self._flat
+
+    def get_chapter_by_path(self, filepath: str or PosixPath):
+        """
+        Try and find filepath in working dir or src dir. If it is present in
+        one of those — return relative path to file (as it is stated in chapters)
+        """
+        abs_path = Path(filepath).resolve()
+        if self.working_dir and self.working_dir in abs_path.parents:
+            chapter_path = str(abs_path.relative_to(self.working_dir))
+        if self.src_dir and self.src_dir in abs_path.parents:
+            chapter_path = str(abs_path.relative_to(self.src_dir))
+        if chapter_path and chapter_path in self.chapters:
+            return chapter_path
+        else:
+            raise ChapterNotFoundError(f'{filepath} is not in the chapter list')
 
     def paths(self, parent_dir: str or PosixPath):
         """

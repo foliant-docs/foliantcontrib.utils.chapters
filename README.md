@@ -38,13 +38,28 @@ chapters:
         - specs/classes.md
 ```
 
-If we want to interact wit this list of chapters, we will probably only need path to Markdown-files in the proper order. That's exactly what the `Chapters` class offers. Let's translate this chapter list into Python and give it to the `Chapters` class:
+If we want to interact wit this list of chapters, we will probably need path to Markdown-files in the proper order. That's exactly what the `Chapters` class offers. Let's translate this chapter list into Python and give it to the `Chapters` class:
 
 ```python
 >>> chapters_list = ['introduction.md',{'Overview': [{'The Problem': 'problem.md'},{'Requirements': 'req.md'},{'Quick Start': ['qs/installation.md','qs/first_steps.md','qs/advanced_usage.md']}]},{'Specifications': ['specs/core.md', 'specs/classes.md']}]
 >>> chapters = Chapters(chapters_list)
 
 ```
+
+Optionally you can specify paths to your working and src dirs, those will be needed for the proper work of some methods:
+
+```python
+>>> chapters = Chapters(chapters_list, working_dir='__folianttmp__', src_dir='src')
+
+```
+
+But the recommended much easier option for initializing the Chapter class is by using `from_config` method:
+
+```python
+chapters = Chapters.from_config(config)
+```
+
+where config is your parsed foliant config dictionary.
 
 ### The **flat** property
 
