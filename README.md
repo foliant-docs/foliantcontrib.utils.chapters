@@ -1,4 +1,4 @@
-[![](https://img.shields.io/pypi/v/foliantcontrib.utils.chapters.svg)](https://pypi.org/project/foliantcontrib.utils.combined-options/) [![](https://img.shields.io/github/v/tag/foliant-docs/foliantcontrib.utils.chapters.svg?label=GitHub)](https://github.com/foliant-docs/foliantcontrib.utils.chapters)
+[![](https://img.shields.io/pypi/v/foliantcontrib.utils.chapters.svg)](https://pypi.org/project/foliantcontrib.utils.chapters/) [![](https://img.shields.io/github/v/tag/foliant-docs/foliantcontrib.utils.chapters.svg?label=GitHub)](https://github.com/foliant-docs/foliantcontrib.utils.chapters)
 
 # Chapters utils
 
