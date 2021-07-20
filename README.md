@@ -1,5 +1,7 @@
 [![](https://img.shields.io/pypi/v/foliantcontrib.utils.chapters.svg)](https://pypi.org/project/foliantcontrib.utils.chapters/) [![](https://img.shields.io/github/v/tag/foliant-docs/foliantcontrib.utils.chapters.svg?label=GitHub)](https://github.com/foliant-docs/foliantcontrib.utils.chapters)
 
+**This package is deprecated and will be removed in future. Chapters utils moved to the [main utils package](https://github.com/foliant-docs/foliantcontrib.utils).
+
 # Chapters utils
 
 This module contains utils which make work with Foliant chapter lists easier.
